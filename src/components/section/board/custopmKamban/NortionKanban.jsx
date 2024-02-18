@@ -59,7 +59,7 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
                     {cards.length}
                 </span>
             </div>
-            <div className={`h-full w-full transition-colors ${active ? "bg-neautral-800/50" : "bg-neautral-800/0"
+            <div className={`h-full w-full transition-colors ${!active ? "bg-neutral-800/50" : "bg-neutral-800/0"
             }`}
             ></div>
         </div>
