@@ -48,6 +48,7 @@ const Board = () => {
 
 
 const Column = ({ title, headingColor, column, cards, setCards }) => {
+    const [active, setActive] = useState(false);
     return (
         <div className='w-56 shrink-0'>
             <div className='mb-3 flex items-center justify-between'>
@@ -58,6 +59,9 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
                     {cards.length}
                 </span>
             </div>
+            <div className={`h-full w-full transition-colors ${active ? "bg-neautral-800/50" : "bg-neautral-800/0"
+            }`}
+            ></div>
         </div>
     )
 }
