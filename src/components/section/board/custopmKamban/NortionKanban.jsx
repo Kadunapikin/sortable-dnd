@@ -43,8 +43,64 @@ const Board = () => {
 
         </div>
     )
-            
 }
+
+const DEFAULT_CARDS = [
+    //Backlog
+    {
+        id: '1',
+        title: 'Look into render bug in dashboard',
+        column: 'backlog'
+    },
+    {
+        id: '2',
+        title: 'SOX compliance checklist',
+        column: 'backlog'
+    },
+    {
+        id: '3',
+        title: '[SPIKE] migrate to Azure',
+        column: 'backlog'
+    },
+    {
+        id: '4',
+        title: 'Document Notification service',
+        column: 'backlog'
+    },
+    //TODO
+    {
+        id: '5',
+        title: 'Research DB options for new microservice',
+        column: 'todo'
+    },
+    {
+        id: '6',
+        title: 'Postmortem for outage',
+        column: 'todo'
+    },
+    {
+        id: '7',
+        title: 'sync with product on Q3 Roadmap',
+        column: 'todo'
+    },
+    //DOING...
+    {
+        id: '8',
+        title: 'Implement new feature',
+        column: 'doing'
+    },
+    {
+        id: '9',
+        title: 'Refactor content providers',
+        column: 'doing'
+    },
+    //DONE
+    {
+        id: '10',
+        title: 'Setup DD dashboard for lamba listeners',
+        column: 'done'
+    }
+]
 
 
 const Column = ({ title, headingColor, column, cards, setCards }) => {
