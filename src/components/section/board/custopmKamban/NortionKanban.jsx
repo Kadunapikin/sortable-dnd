@@ -73,6 +73,7 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
 const Card = ({ title, id, column }) => {
     return (
         <>
+            <DropIndicator before={id} column={column} />
             <div
             draggable='true' 
             className='cursor-grab rounded before border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing'
@@ -80,6 +81,16 @@ const Card = ({ title, id, column }) => {
                 <p className='text-sm text-neutral-100'>{title}</p>
             </div>
         </>
+    )
+}
+
+const DropIndicator = ({ beforeId, column }) => {
+    return (
+        <div 
+            data-before={beforeId || "-1"}
+            data-column={column}
+            className='my-0.5 h-0.5 w-full bg-violet-400 opacity-0'>
+        </div>
     )
 }
 
