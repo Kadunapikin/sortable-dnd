@@ -114,9 +114,23 @@ const BurnBarell = ({ setCards }) => {
 const AddCart = ({ column, setCards }) => {
     const [text, setText] = useState("");
     const [adding, setAdding] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!text.trim().length) return;
+
+        const newCard = {
+            column,
+            title: text.trim(),
+            id: Math.random().toString(),
+        };
+
+        setCards((prev) => [...prev, newCard]);
+        setAdding(false);
+    }
     return <>
         {adding ? (
-            <form>
+            <form onSubmit={handleSubmit}>
                 <textarea 
                 onChange={(e) => setText(e.target.value)}
                 autoFocus
@@ -127,6 +141,13 @@ const AddCart = ({ column, setCards }) => {
                 >
                     <button className='px-3 py-1.5 text-sm text-neutral-400 transition-colors hover:text-neutral-50'>
                         Close
+                    </button>
+                    <button
+                    type="submit"
+                    className='flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-sm text-neutral-950 transition-colors hover:bg-neutral-300'
+                    >
+                        <span>Add</span>
+                        <FiPlus />
                     </button>
                 </div>
             </form>
