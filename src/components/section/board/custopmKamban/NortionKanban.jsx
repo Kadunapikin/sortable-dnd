@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaFire } from 'react-icons/fa';
-import { FiTrash } from 'react-icons/fi';
+import { FiPlus, FiTrash } from 'react-icons/fi';
 
 export const NortionKanban = () => {
   return (
@@ -68,6 +68,8 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
                 {filteredCards.map((c) => {
                     return <Card key={c.id} {...c}/>;
                 })}
+                <DropIndicator beforeId="-1" column={column} />
+                <AddCart column={column} setCards={setCards} />
             </div>
         </div>
     )
@@ -107,6 +109,18 @@ const BurnBarell = ({ setCards }) => {
             }`}
             >{active ? <FaFire className="animate-bounce" /> : <FiTrash />}</div>
     )
+}
+
+const AddCart = ({ column, setCards }) => {
+    const [text, setText] = useState("");
+    const [adding, setAdding] = useState(false);
+    return <>
+        {adding ? <></> : <button onClick={() => setAdding(true)} className='flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50'
+            >
+                <span>Add Card</span>
+                <FiPlus />
+            </button>}
+        </>
 }
 
 
