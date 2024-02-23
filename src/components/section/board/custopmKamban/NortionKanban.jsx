@@ -125,25 +125,24 @@ const AddCart = ({ column, setCards }) => {
             id: Math.random().toString(),
         };
 
-        setCards((prev) => [...prev, newCard]);
+        setCards((pv) => [...pv, newCard]);
         setAdding(false);
     }
     return <>
         {adding ? (
-            <form onSubmit={handleSubmit}>
+            <form action="" onSubmit={handleSubmit}>
                 <textarea 
                 onChange={(e) => setText(e.target.value)}
                 autoFocus
                 placeholder='Add New Task...'
                 className='w-full rounded border border-violet-400 bg-violet-400/20 p-3 text-sm text-neutral-50 placeholder-violet-300 focus:outline-0'/>
-                <div onClick={() => setAdding(false)}
+                <div onClick={() => setAdding(true)}
                 className='mt-1.5 flex items-center justify-end gap-1.5'
                 >
                     <button className='px-3 py-1.5 text-sm text-neutral-400 transition-colors hover:text-neutral-50'>
                         Close
                     </button>
-                    <button
-                    type="submit"
+                    <button type='submit'
                     className='flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-sm text-neutral-950 transition-colors hover:bg-neutral-300'
                     >
                         <span>Add</span>
