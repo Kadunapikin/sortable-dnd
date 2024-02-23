@@ -52,6 +52,11 @@ const Board = () => {
 const Column = ({ title, headingColor, column, cards, setCards }) => {
     const [active, setActive] = useState(false);
     const filteredCards = cards.filter((c) => c.column === column);
+
+    const handleDragStart = (e, card) => {
+        e.dataTransfer.setData("cardId", card.id);
+    }
+
     return (
         <div className='w-56 shrink-0'>
             <div className='mb-3 flex items-center justify-between'>
@@ -66,7 +71,8 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
             }`}
             >
                 {filteredCards.map((c) => {
-                    return <Card key={c.id} {...c}/>;
+                    return <Card key={c.id} {...c}
+                    handleDragStart={handleDragStart}/>;
                 })}
                 <DropIndicator beforeId="-1" column={column} />
                 <AddCart column={column} setCards={setCards} />
@@ -75,12 +81,13 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
     )
 }
 
-const Card = ({ title, id, column }) => {
+const Card = ({ title, id, column, handleDragStart }) => {
     return (
         <>
             <DropIndicator before={id} column={column} />
             <div
-            draggable='true' 
+            draggable='true'
+            onDragStart={(e) => handleDragStart(e, { title, column, id })} 
             className='cursor-grab rounded before border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing'
             >
                 <p className='text-sm text-neutral-100'>{title}</p>
@@ -101,8 +108,31 @@ const DropIndicator = ({ beforeId, column }) => {
 
 const BurnBarell = ({ setCards }) => {
     const [active, setActive] = useState(false);
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setActive(true);
+    }
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setActive(false);
+    }
+
+    const handleDragEnd = (e) => {
+        const cardId = e.dataTransfer.getData("cardId");
+
+        setCards((pv) => pv.filter((c) => c.id !== cardId))
+
+        setActive(false);
+    }
+
     return (
-        <div className={`mt-10 grid h-56 w-56 shrink-0 place-content-center rounded border text-3xl ${
+        <div
+        onDrop={handleDragEnd}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        className={`mt-10 grid h-56 w-56 shrink-0 place-content-center rounded border text-3xl ${
             active 
             ? "border-red-800 bg-red-800/20 text-red-500" 
             : "border-neutral-500 bg-neutral-500/20 text-neutral-500"
