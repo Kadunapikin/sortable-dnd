@@ -163,7 +163,7 @@ const AddCart = ({ column, setCards }) => {
     }
     return <>
         {adding ? (
-            <form action="" onSubmit={handleSubmit}>
+            <motion.form layout action="" onSubmit={handleSubmit}>
                 <textarea 
                 onChange={(e) => setText(e.target.value)}
                 autoFocus
@@ -182,13 +182,13 @@ const AddCart = ({ column, setCards }) => {
                         <FiPlus />
                     </button>
                 </div>
-            </form>
+            </motion.form>
         ) : (
-            <button onClick={() => setAdding(true)} className='flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50'
+            <motion.button onClick={() => setAdding(true)} className='flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50'
             >
                 <span>Add Card</span>
                 <FiPlus />
-            </button>)
+            </motion.button>)
         }
         </>
 }
