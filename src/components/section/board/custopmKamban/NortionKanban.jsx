@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaFire } from 'react-icons/fa';
 import { FiPlus, FiTrash } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 
 export const NortionKanban = () => {
   return (
@@ -85,13 +86,15 @@ const Card = ({ title, id, column, handleDragStart }) => {
     return (
         <>
             <DropIndicator before={id} column={column} />
-            <div
+            <motion.div
+            layout
+            layoutId={id}
             draggable='true'
             onDragStart={(e) => handleDragStart(e, { title, column, id })} 
             className='cursor-grab rounded before border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing'
             >
                 <p className='text-sm text-neutral-100'>{title}</p>
-            </div>
+            </motion.div>
         </>
     )
 }
